@@ -1,0 +1,71 @@
+*{
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+  
+}
+
+html{
+  background-image: url("../img/20230825175911_[fpdl.in]_autumn-background_23-2149045087_full.jpg");
+    background-size:cover;
+}
+
+body{
+  height: 100vh;
+  position:absolute;
+  align-items: center;
+}
+
+button{
+    font-family: 'B Yekan' , "Arial";
+    background-color: #ff5e00;
+    border-radius: 12px;
+    color: #fffefe;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-align:center;
+    transition: 200ms;
+    width: 100px;
+    box-sizing: border-box;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-top: 10px;
+    
+  }
+  
+  button:not(:disabled):hover,
+  button:not(:disabled):focus {
+    outline: 0;
+    background: #f4e603;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+  }
+  
+  button:disabled {
+    filter: saturate(0.2) opacity(0.5);
+    -webkit-filter: saturate(0.2) opacity(0.5);
+    cursor: not-allowed;
+  }
+
+
+  .login{
+    width: 360px;
+    height:min-content ;
+    padding: 20px;
+    border-radius: 30px;
+    background-color : rgba(255, 174, 0, 0.541)  ;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: 30%;
+    left:35vw;
+  }
+
+  .login form {
+    font-size: 20px;
+    border-radius: 30px;
+}
+
+

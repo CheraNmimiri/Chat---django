@@ -1,0 +1,55 @@
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/chatPage.css">
+    <title> Chat page</title>
+</head>
+<body>
+    <h1 id="h1class">سلام. به سایت چتمونی خوش اومدید! <br>{{request.user.username}}</h1>
+    {% if request.user.is_authenticated %}
+    <p id="senlogout">اگر میخواهید از سایت خارج شوید بر روی <a href = "{% url 'logout-user' %}">Log out </a>کلیک کنید.</p>
+    {% endif %}
+    
+      <br />
+      <input type="text" id="myInput" class="input-group__input" placeholder="پیام خود را پیدا کنید" />
+      <br><br>
+      <button type="button" id="id_message_send_button">ارسال پیام</button>
+      <div
+      class="chat__item__container"
+      id="id_chat_item_container"
+      style="font-size: 20px"
+    >
+      <br />
+      <br />
+    </div>
+    <script>
+      const chatSocket = new WebSocket("ws://" + window.location.host + "/");
+      chatSocket.onopen = function (e) {
+        console.log("The connection was setup successfully !");
+      };
+      chatSocket.onclose = function (e) {
+        console.log("Something unexpected happened !");
+      };
+      document.querySelector(".input-group__input").focus();
+      document.querySelector(".input-group__input").onkeyup = function (e) {
+        if (e.keyCode == 13) {
+          document.querySelector("#id_message_send_button").click();
+        }
+      };
+      document.querySelector("#id_message_send_button").onclick = function (e) {
+        var messageInput = document.querySelector(
+          ".input-group__input"
+        ).value;
+        chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}"}));
+      };
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        var div = document.createElement("div");
+        div.innerHTML = data.username + " : " + data.message;
+        document.querySelector(".input-group__input").value = "";
+        document.querySelector("#id_chat_item_container").appendChild(div);
+      };
+    </script>
+  </body>
+</html>
